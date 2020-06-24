@@ -62,7 +62,14 @@ pub fn subscribe_fn(
         })
     }
 }
-
+pub unsafe fn yieldk_for<F: Fn() -> bool>(cond: F) {
+    while !cond() {
+        platform::yieldk();
+    }
+}
+pub unsafe fn yieldk(){
+    platform::yieldk() ;
+}
 pub fn command(
     driver_number: usize,
     command_number: usize,

@@ -5,7 +5,6 @@ extern crate alloc;
 
 use alloc::string::String;
 use libtock::console::Console;
-use libtock::fmt;
 use libtock::ipc_client;
 use libtock::ipc_client::IpcClientCallback;
 use libtock::ipc_client::ServerHandle;
@@ -13,8 +12,8 @@ use libtock::timer;
 
 // Calls the ipc_server and prints result
 fn main() {
-    let mut server_buf = ipc::reserve_shared_buffer();
-    let mut my_buf = ipc::reserve_shared_buffer();
+    let mut server_buf = ipc_client::reserve_shared_buffer();
+    let mut my_buf = ipc_client::reserve_shared_buffer();
     timer::sleep(timer::Duration::from_ms(1000));
 
     loop {
