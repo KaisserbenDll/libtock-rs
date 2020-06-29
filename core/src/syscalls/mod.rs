@@ -1,6 +1,6 @@
 #[cfg_attr(target_arch = "riscv32", path = "platform_riscv32.rs")]
 #[cfg_attr(target_arch = "arm", path = "platform_arm.rs")]
-mod platform;
+pub mod platform;
 
 use crate::callback::CallbackSubscription;
 use crate::callback::Consumer;

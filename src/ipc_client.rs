@@ -1,39 +1,33 @@
 use crate::callback::CallbackSubscription;
-use crate::callback::Identity3Consumer;
+use crate::callback::Consumer;
+//use crate::callback::SubscribableCallback;
 use crate::result::*;
 use crate::shared_memory::SharedMemory;
 use crate::syscalls;
+use crate::syscalls::platform;
 //use libtock_core::syscalls::allow;
-use alloc::string;
+use alloc::string::String;
 //yield() is libtock_core::syscalls::raw::yieldk
-
 const DRIVER_NUMBER: usize = 0x10000;
+
 
 mod ipc_commands {
     pub const DISCOVER_SERVICE: usize = 0;
 }
 
- pub struct IpcClientCallback {
-    callback: Identity3Consumer,
+pub struct IpcClientCallback;
 
- }
-// impl<CB> IpcClientCallback<CB> {
-//     pub fn new(callback: CB) -> Self {
-//         IpcClientCallback { callback }
-//     }
-// }
-//
-// impl<CB: FnMut(usize, usize,usize)> Identity3Consumer for IpcClientCallback<CB> {
-//     fn consume(&mut self, pid: usize, len: usize, _: usize) {
-//         (self.callback)(pid, len);
-//     }
-// }
+impl<CB: FnMut(usize, usize)> Consumer<CB> for IpcClientCallback {
+    fn consume(callback:&mut CB, pid: usize, len: usize, _: usize) {
+        (callback)(pid, len);
+    }
+}
 
 pub fn reserve_shared_buffer() -> IPCBuffer {
     IPCBuffer { buffer: [0; 32] }
 }
 
-#[repr(align(32))]
+//#[repr(align(32))]
 pub struct IPCBuffer {
     pub buffer: [u8; 32],
 }
@@ -45,14 +39,14 @@ impl ServerHandle {
     // Performs service discovery
     // Returns the process identifier of the process with the given package name,
     // or a negative value on error.
-    pub fn ipc_discover_service(mut name: string) -> Option<ServerHandle> {
+    pub fn ipc_discover_service(mut name: String) -> Option<ServerHandle> {
         let len = name.len();
         let pid = unsafe {
-            syscalls::allow( // Some ambiguities about the allow_ptr :(
+            platform::allow( // Some ambiguities about the allow_ptr :(
                              DRIVER_NUMBER,
                              ipc_commands::DISCOVER_SERVICE,
-                             name.as_bytes_mut(),//.as_mut_ptr(),
-                             //len,
+                             name.as_bytes_mut().as_mut_ptr(),
+                             len,
             )
         };
         if pid >= 0 {
@@ -75,15 +69,36 @@ impl ServerHandle {
     //               shared from the service.
     //   void* ud  - `userdata`. same as the argument to this function.
     //              In our case its NULL
-    pub fn ipc_register_client_cb<'a>(&self,callback: &'a mut IpcClientCallback,
-    ) -> Result<CallbackSubscription<'a>, SubscribeError> {
-        syscalls::subscribe(DRIVER_NUMBER, self.pid, callback)
+    // pub fn ipc_register_client_cb<'a>(&self,callback: &'a mut IpcClientCallback,
+    // ) -> Result<CallbackSubscription<'a>, SubscribeError> {
+    //     syscalls::subscribe_fn(DRIVER_NUMBER, self.pid, callback,0)
+    // }
+    // pub fn ipc_register_client_cb<'a>(
+    //     &self,
+    //     callback: extern "C" fn(usize, usize, usize, usize),
+    //     userdata: usize)
+    //     -> Result<(), SubscribeError> {
+    //     syscalls::subscribe_fn(DRIVER_NUMBER, self.pid, callback,userdata)
+    // }
+    pub fn ipc_register_client_cb<'a, CB: FnMut(usize, usize)>(
+        &self,
+        callback: &'a mut CB,
+        ) -> TockResult<CallbackSubscription<'a>> {
+        syscalls::subscribe::<IpcClientCallback, _>(
+            DRIVER_NUMBER,
+            self.pid,
+            callback,
+        )
+        .map_err(Into::into)
     }
     // Send a notify to the service at the given process id
     pub fn ipc_notify_svc(&mut self) -> Result<usize, CommandError> {
-        return unsafe { syscalls::command(DRIVER_NUMBER, self.pid as usize, 0, 0) };
-
+        let res =
+        syscalls::command(DRIVER_NUMBER, self.pid as usize, 0, 0);
+        return res ;
     }
+
+
     // Share a buffer with the given process (either service or client)
     //
     // `pid` is the non-zero process id of the recipient.
