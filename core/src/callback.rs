@@ -2,6 +2,18 @@ use crate::syscalls;
 use core::marker::PhantomData;
 use core::ptr;
 
+// SubscribableCallback trait added because of IPC
+pub trait SubscribableCallback {
+    fn call_rust(&mut self, arg0: usize, arg1: usize, arg2: usize);
+}
+
+impl<F: FnMut(usize, usize, usize)> SubscribableCallback for F {
+    fn call_rust(&mut self, arg0: usize, arg1: usize, arg2: usize) {
+        self(arg0, arg1, arg2)
+    }
+}
+// End of SubscraibableCallback
+
 pub trait Consumer<T> {
     fn consume(data: &mut T, arg1: usize, arg2: usize, arg3: usize);
 }

@@ -15,9 +15,16 @@ mod ipc_commands {
     pub const DISCOVER_SERVICE: usize = 0;
 }
 
-pub struct IpcClientCallback;
-
-impl<CB: FnMut(usize, usize)> Consumer<CB> for IpcClientCallback {
+#[allow(dead_code)]
+pub struct IpcClientCallback<CB> {
+    callback: CB,
+}
+impl<CB> IpcClientCallback<CB> {
+    pub fn new(callback: CB) -> Self {
+        IpcClientCallback { callback }
+    }
+}
+impl<CB: FnMut(usize, usize)> Consumer<CB> for IpcClientCallback<CB> {
     fn consume(callback:&mut CB, pid: usize, len: usize, _: usize) {
         (callback)(pid, len);
     }
@@ -26,11 +33,11 @@ impl<CB: FnMut(usize, usize)> Consumer<CB> for IpcClientCallback {
 pub fn reserve_shared_buffer() -> IPCBuffer {
     IPCBuffer { buffer: [0; 32] }
 }
-
-//#[repr(align(32))]
+#[repr(align(32))]
 pub struct IPCBuffer {
     pub buffer: [u8; 32],
 }
+
 
 pub struct ServerHandle {
     pid: usize,
@@ -84,11 +91,12 @@ impl ServerHandle {
         &self,
         callback: &'a mut CB,
         ) -> TockResult<CallbackSubscription<'a>> {
-        syscalls::subscribe::<IpcClientCallback, _>(
+        syscalls::subscribe::<IpcClientCallback<CB>, _>(
             DRIVER_NUMBER,
             self.pid,
             callback,
         )
+
         .map_err(Into::into)
     }
     // Send a notify to the service at the given process id

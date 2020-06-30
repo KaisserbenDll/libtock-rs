@@ -2,7 +2,4 @@
 /layout.ld
 /platform
 /target
-examples/com_process.rs
-examples/main_process.rs
-src/ipc_server_bak.rs
 .idea/
