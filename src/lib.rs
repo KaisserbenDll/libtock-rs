@@ -25,10 +25,9 @@ pub mod sensors;
 pub mod simple_ble;
 pub mod temperature;
 pub mod timer;
-//pub mod ipc_server;
-//pub mod ipc_client;
+pub mod ipc_server;
+pub mod ipc_client;
 
 pub use drivers::retrieve_drivers;
 pub use libtock_codegen::main;
 pub use libtock_core::*;
-//pub use libtock_core::syscalls::platform;
