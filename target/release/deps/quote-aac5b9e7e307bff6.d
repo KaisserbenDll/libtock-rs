@@ -1,0 +1,13 @@
+/home/dll/Documents/MA/Userspace/libtock-rs/target/release/deps/quote-aac5b9e7e307bff6.rmeta: /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/lib.rs /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/ext.rs /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/format.rs /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/ident_fragment.rs /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/to_tokens.rs /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/runtime.rs /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/spanned.rs
+
+/home/dll/Documents/MA/Userspace/libtock-rs/target/release/deps/libquote-aac5b9e7e307bff6.rlib: /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/lib.rs /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/ext.rs /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/format.rs /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/ident_fragment.rs /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/to_tokens.rs /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/runtime.rs /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/spanned.rs
+
+/home/dll/Documents/MA/Userspace/libtock-rs/target/release/deps/quote-aac5b9e7e307bff6.d: /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/lib.rs /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/ext.rs /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/format.rs /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/ident_fragment.rs /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/to_tokens.rs /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/runtime.rs /home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/spanned.rs
+
+/home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/lib.rs:
+/home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/ext.rs:
+/home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/format.rs:
+/home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/ident_fragment.rs:
+/home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/to_tokens.rs:
+/home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/runtime.rs:
+/home/dll/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.6/src/spanned.rs:

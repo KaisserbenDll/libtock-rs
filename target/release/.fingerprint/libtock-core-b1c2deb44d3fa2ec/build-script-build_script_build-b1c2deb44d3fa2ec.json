@@ -1,0 +1,1 @@
+{"rustc":17109510516401277427,"features":"[\"alloc\", \"linked_list_allocator\"]","target":10429514197457385088,"profile":13975239754166311112,"path":7609055586256650937,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/libtock-core-b1c2deb44d3fa2ec/dep-build-script-build_script_build-b1c2deb44d3fa2ec"}}],"rustflags":[],"metadata":5599419765345498685}

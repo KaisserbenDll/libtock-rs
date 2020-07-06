@@ -1,0 +1,8 @@
+cargo:rerun-if-env-changed=PLATFORM
+cargo:rerun-if-env-changed=APP_HEAP_SIZE
+cargo:rerun-if-env-changed=KERNEL_HEAP_SIZE
+cargo:rerun-if-changed=platform
+cargo:rerun-if-changed=layout.ld
+cargo:rustc-env=PLATFORM=opentitan
+cargo:rustc-env=APP_HEAP_SIZE=1024
+cargo:rustc-env=KERNEL_HEAP_SIZE=1024

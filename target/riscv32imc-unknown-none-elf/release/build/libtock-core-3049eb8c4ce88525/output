@@ -1,0 +1,2 @@
+cargo:rerun-if-env-changed=APP_HEAP_SIZE
+cargo:rustc-env=APP_HEAP_SIZE=1024
